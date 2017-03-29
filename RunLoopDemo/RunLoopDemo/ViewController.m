@@ -11,6 +11,7 @@
 
 @interface ViewController ()
 
+@property (nonatomic, strong) NSObject *cc;
 @end
 
 @implementation ViewController
@@ -18,20 +19,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    self.cc = [NSObject new];
+    [self performSelector:@selector(noti:) withObject:self.cc afterDelay:5];
+    [self performSelector:@selector(noti1:) withObject:self.cc afterDelay:7];
+    [self performSelector:@selector(noti2:) withObject:self.cc afterDelay:9];
     
     //NSLog(@"noti:\n current runloop: %@  cunrrent thread :%@  main: %@",[NSRunLoop currentRunLoop],[NSThread currentThread],[NSRunLoop mainRunLoop]);
-    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noti:) name:@"runloopTest" object:nil];
-    });
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"runloopTest" object:nil];
-    NSLog(@"noti:\n current runloop: %@  cunrrent thread :%@",[NSRunLoop currentRunLoop],[NSThread currentThread]);
+//    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noti:) name:@"runloopTest" object:nil];
+//    });
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"runloopTest" object:nil];
+//    NSLog(@"noti:\n current runloop: %@  cunrrent thread :%@",[NSRunLoop currentRunLoop],[NSThread currentThread]);
     
 }
 
-- (void)noti:(NSNotification *)not
+- (void)noti:(NSObject *)not
 {
-    NSLog(@"noti:\n current runloop: %@  cunrrent thread :%@",[NSRunLoop currentRunLoop],[NSThread currentThread]);
+    not = nil;
+}
+
+- (void)noti1:(NSObject *)not
+{
+    not = [NSObject new];;
+}
+- (void)noti2:(NSObject *)not
+{
+    NSLog(@"%@",not);
+    dispatch_walltime(, <#int64_t delta#>)
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
