@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D1091D11EFA8D7700ACF981 /* DataSort.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1091D01EFA8D7700ACF981 /* DataSort.m */; };
 		0D566F8F1E7D7B2B0048A47C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D566F8E1E7D7B2B0048A47C /* main.m */; };
 		0D566F921E7D7B2B0048A47C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D566F911E7D7B2B0048A47C /* AppDelegate.m */; };
 		0D566F951E7D7B2B0048A47C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D566F941E7D7B2B0048A47C /* ViewController.m */; };
@@ -27,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D1091CF1EFA8D7700ACF981 /* DataSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSort.h; sourceTree = "<group>"; };
+		0D1091D01EFA8D7700ACF981 /* DataSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSort.m; sourceTree = "<group>"; };
 		0D566F8A1E7D7B2B0048A47C /* RunLoopDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunLoopDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D566F8E1E7D7B2B0048A47C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0D566F901E7D7B2B0048A47C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,6 +84,8 @@
 		0D566F8C1E7D7B2B0048A47C /* RunLoopDemo */ = {
 			isa = PBXGroup;
 			children = (
+				0D1091CF1EFA8D7700ACF981 /* DataSort.h */,
+				0D1091D01EFA8D7700ACF981 /* DataSort.m */,
 				0D566F901E7D7B2B0048A47C /* AppDelegate.h */,
 				0D566F911E7D7B2B0048A47C /* AppDelegate.m */,
 				0D566F931E7D7B2B0048A47C /* ViewController.h */,
@@ -216,6 +221,7 @@
 				0D566F951E7D7B2B0048A47C /* ViewController.m in Sources */,
 				0D566F921E7D7B2B0048A47C /* AppDelegate.m in Sources */,
 				0D566F8F1E7D7B2B0048A47C /* main.m in Sources */,
+				0D1091D11EFA8D7700ACF981 /* DataSort.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +416,7 @@
 				0D566FAE1E7D7B2B0048A47C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0D566FAF1E7D7B2B0048A47C /* Build configuration list for PBXNativeTarget "RunLoopDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +425,7 @@
 				0D566FB11E7D7B2B0048A47C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
