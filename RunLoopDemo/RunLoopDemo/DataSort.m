@@ -10,7 +10,45 @@
 
 @implementation DataSort
 
-// 1.选择排序
+// 1.插入排序
+- (void)insertionSort:(NSMutableArray *)array
+{
+    int temp;
+    for (int i = 0; i < array.count; i++) {
+        temp = [array[i] intValue];
+        // i 之前的数组 把i插进去
+        for (int j = i; j > 0; j--) {
+            if ([array[j-1] intValue] > temp) {
+                array[j] = array[j-1];
+            } else {
+                array[j] = @(temp);
+                break;
+            }
+        }
+    }
+}
+
+// 2.希尔排序
+// 插入排序更高效
+- (void)shellSort:(NSMutableArray *)array
+{
+    int gap = floor(array.count/2);
+    while (gap>0) {
+        for (int i = gap; i < array.count; i++) {  // 从最后一组开始
+            for (int j = i; j > 0; j -= gap) {
+                if (array[j - gap] > array[j]) {
+                    [self swap:array i:j j:j-gap];
+                } else {
+                    break;
+                }
+            }
+        }
+        gap = floor(gap/2);
+    }
+}
+
+
+// 3.选择排序
 - (void)selectionSort:(NSMutableArray *)array
 {
     int minIndex, minValue;
@@ -25,51 +63,13 @@
             }
         }
         // 交换
-        int temp = [array[i] intValue];
-        array[i] = @(minValue);
-        array[minIndex] = @(temp);
+        [self swap:array i:i j:minIndex];
         
     }
 }
 
-// 快速排序
-// 分治法, 选择一个"基准", 左小右大
-// 2.1交换方法
-- (void)swap:(NSMutableArray *)array i:(int)i j:(int)j
-{
-    int temp = [array[i] intValue];
-    array[i] = array[j];
-    array[j] = @(temp);
-}
 
-// 2.2分割函数
-- (int)partiton:(NSMutableArray *)array left:(int)left right:(int)right
-{
-    int storeIndex = left; // 存储值
-    int pivot = [array[right] intValue];
-    for (int i = 0; i < array.count; i++) {
-        if ([array[i] intValue] < pivot) {
-            [self swap:array i:i j:storeIndex]; // 小于轴的都放在左
-            storeIndex++;
-        }
-    }
-    // 交换轴的位置
-    [self swap:array i:storeIndex j:right];
-    return storeIndex;
-}
-
-// 2.快排
-- (void)quickSort:(NSMutableArray *)array left:(int)left right:(int)right
-{
-    if (left > right) {
-        return ;
-    }
-    int poivtIndex = [self  partiton:array left:left right:right];
-    [self quickSort:array left:left right:poivtIndex-1];
-    [self quickSort:array left:poivtIndex+1 right:right];
-}
-
-// 3.堆排
+// 4.堆排
 // 二叉堆(完全二叉树)
 // 最大堆: 最大值在堆顶  最小堆: 最小值在堆顶
 
@@ -125,44 +125,54 @@
     
 }
 
-// 4.插入排序
-- (void)insertionSort:(NSMutableArray *)array
+// 交换排序: 冒泡和快拍
+// 5.快速排序
+// 分治法, 选择一个"基准", 左小右大
+// 2.1交换方法
+- (void)swap:(NSMutableArray *)array i:(int)i j:(int)j
 {
-    int temp;
-    for (int i = 0; i < array.count; i++) {
-        temp = [array[i] intValue];
-        // i 之前的数组 把i插进去
-        for (int j = i; j > 0; j--) {
-            if ([array[j-1] intValue] > temp) {
-                array[j] = array[j-1];
-            } else {
-                array[j] = @(temp);
-                break;
-            }
-        }
-    }
+    int temp = [array[i] intValue];
+    array[i] = array[j];
+    array[j] = @(temp);
 }
 
-// 5.希尔排序
-// 插入排序更高效
-- (void)shellSort:(NSMutableArray *)array
+// 2.2分割函数
+- (int)partiton:(NSMutableArray *)array left:(int)left right:(int)right
 {
-    int gap = floor(array.count/2);
-    while (gap>0) {
-        for (int i = gap; i < array.count; i++) {  // 从最后一组开始
-            for (int j = i; j > 0; j -= gap) {
-                if (array[j - gap] > array[j]) {
-                    [self swap:array i:j j:j-gap];
-                } else {
-                    break;
-                }
-            }
+    int storeIndex = left; // 存储值
+    int pivot = [array[right] intValue];
+    for (int i = 0; i < array.count; i++) {
+        if ([array[i] intValue] < pivot) {
+            [self swap:array i:i j:storeIndex]; // 小于轴的都放在左
+            storeIndex++;
         }
-        gap = floor(gap/2);
     }
+    // 交换轴的位置
+    [self swap:array i:storeIndex j:right];
+    return storeIndex;
 }
+
+// 2.快排
+- (void)quickSort:(NSMutableArray *)array left:(int)left right:(int)right
+{
+    if (left > right) {
+        return ;
+    }
+    int poivtIndex = [self  partiton:array left:left right:right];
+    [self quickSort:array left:left right:poivtIndex-1];
+    [self quickSort:array left:poivtIndex+1 right:right];
+}
+- (void)quickSort:(NSMutableArray *)array
+{
+    [self quickSort:array left:0 right:(int)array.count-1];
+}
+
 
 // 6.归并排序
+- (void)mergeSort:(NSMutableArray *)array
+{
+    [self mergeSort:array left:0 right:(int)array.count-1];
+}
 // 分治法
 - (void)mergeSort:(NSMutableArray *)array left:(int)left right:(int)right
 {
@@ -195,7 +205,7 @@
     }
 }
 
-// 二分查找/折半查找 前提数组有序
+// 7.二分查找/折半查找 前提数组有序
 - (int)binarySearch:(NSMutableArray *)array left:(int)left right:(int)right temp:(int)temp
 {
     if (left > right) {
@@ -210,6 +220,73 @@
         return middle;
     }
     return -1;
+}
+
+// 8.基数排序
+- (NSArray *)radixSort:(NSMutableArray *)array
+{
+    // 桶  里面是数组
+    NSMutableArray *bucket = [NSMutableArray array];
+    
+    int max = [array[0] intValue];
+    int loop ;
+    
+    // 找出最大数
+    for (int i = 1; i < array.count; i++) {
+        if (max < [array[i] intValue]) {
+            max = [array[i] intValue];
+        }
+            
+    }
+    
+    for (int i = 0; i < 10; i++) {
+        bucket[i] = [NSMutableArray array];
+    }
+    
+    // 找最大位数 采用字符串化
+    loop = (int)[[NSString stringWithFormat:@"%d",max] length];
+   
+    for (int i = 0; i < loop; i ++ ) {
+        for (int j = 0; j < array.count; j++) {
+            
+            NSString *str = [NSString stringWithFormat:@"%d",[array[j] intValue]];
+            if (str.length >= i+1) {
+                // 最i位数字是多少, k是第i位数字
+                int k = [[str substringWithRange:NSMakeRange(str.length - i - 1, 1)] intValue];
+                [bucket[k] addObject:array[j]];
+            } else {
+                [bucket[0] addObject:array[j]];
+            }
+            
+        }
+        
+        array = [NSMutableArray array];
+        for (int j = 0; j < 10; j++) {
+            int t = (int)[bucket[j] count];
+            for (int k = 0; k < t; k++) {
+                [array addObject:bucket[j][k]];
+            }
+            bucket[j] = [NSMutableArray array];
+        }
+        
+    }
+    return array;
+}
+
+char *revers(char *str)
+{
+    if (!str) {
+        return NULL;
+    }
+    
+    int len = strlen(str);
+    
+    for (int i = 0; i < len/2; i++) {
+        char temp = *(str + i);
+        *(str + i) = *(str + len - i - 1);
+        *(str + len - i - 1) = temp;
+    }
+    return str;
 }
 
 @end

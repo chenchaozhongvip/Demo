@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #include <mach/port.h>
+#import "DataSort.h"
 
 @interface ViewController ()
 
@@ -19,11 +20,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.cc = [NSObject new];
-    [self performSelector:@selector(noti:) withObject:self.cc afterDelay:5];
-    [self performSelector:@selector(noti1:) withObject:self.cc afterDelay:7];
-    [self performSelector:@selector(noti2:) withObject:self.cc afterDelay:9];
-    
+
+    NSMutableArray *arr = [NSMutableArray arrayWithObjects:@(12),@(22),@(123),@(52),@(2),@(15),@(1234),@(5),nil] ;
+//    DataSort *sort = [[DataSort alloc] init];
+//
+//    NSArray *Arr = [sort radixSort:arr];
+    //extern int age;
+
     //NSLog(@"noti:\n current runloop: %@  cunrrent thread :%@  main: %@",[NSRunLoop currentRunLoop],[NSThread currentThread],[NSRunLoop mainRunLoop]);
 //    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noti:) name:@"runloopTest" object:nil];
@@ -45,7 +48,7 @@
 - (void)noti2:(NSObject *)not
 {
     NSLog(@"%@",not);
-    dispatch_walltime(, <#int64_t delta#>)
+    //dispatch_walltime(, <#int64_t delta#>)
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
